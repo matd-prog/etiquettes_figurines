@@ -100,11 +100,13 @@ const EcranObjet = {
     if (q.length < 2) { if (!this._refLue) $("objet-nouveautes").innerHTML = ""; return; }
     await CatalogueObjets.charger();
     // d'abord les porte-clés lumineux si la référence lue en est un (KE…)
-    let res = CatalogueObjets.chercher(q, 30);
-    // « 🔑 C'est un porte-clés : le chercher par nom » (Mathias, 11/11/2026) : les porte-clés d'abord
-    if (this._porteCles) { const pc = o => /key ?(chain|light)/i.test(`${o.theme} ${o.nom}`); res = res.filter(pc).concat(res.filter(o => !pc(o))); }
+    let res = CatalogueObjets.chercher(q, this._porteCles ? 2000 : 30);
+    // « 🔑 C'est un porte-clés : le chercher par nom » (Mathias, 11/11/2026) : les porte-clés d'abord. Tous les porte-clés
+    // du personnage sont montrés (Mathias, 14/11/2026 : 17 porte-clés Batman, « Kiss Kiss Tuxedo Batman » n'apparaissait pas
+    // parmi les 8 premiers)
+    if (this._porteCles) { const pc = o => /key ?(chain|light|ring)/i.test(`${o.theme} ${o.nom}`); const lesPc = res.filter(pc); res = lesPc.length ? lesPc : res.slice(0, 8); }
     if (/^KE/.test(this._refLue || "")) res = res.filter(o => /light/i.test(o.nom)).concat(res.filter(o => !/light/i.test(o.nom)));
-    this.proposer(res.slice(0, 8), this._refLue ? `Référence lue : <b>${echapper(this._refLue)}</b>. Touchez le bon :` : "");
+    this.proposer(res.slice(0, this._porteCles ? 40 : 8), this._refLue ? `Référence lue : <b>${echapper(this._refLue)}</b>. Touchez le bon :` : "");
   },
 
   proposer(res, info = "") {

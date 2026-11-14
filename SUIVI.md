@@ -125,6 +125,10 @@ Tout le code et les données sont dans ce dépôt ; ce fichier sert à reprendre
     « Figothèque » toujours acceptées. INPI vérifié par Mathias (02/10) : une seule marque
     « BRIQUOTHEQUE » (n° 1695257, Wienerberger, 1991, classe 19 matériaux de construction), EXPIRÉE le 25/09/2021 ->
     nom libre en France. EUIPO « Briquothèque » et « Briquotheque » : 0 marque -> nom libre en France et dans l'UE ; dépôt éventuel classes 9 et 42 avant une diffusion commerciale.
+  · v204 (14/11) : PORTE-CLÉS QUAND AUCUNE FIGURINE N'EST RECONNUE (Mathias : porte-clés « Kiss Kiss Tuxedo Batman »
+    jamais reconnu, seuls « Google Lens » et « Fermer » proposés). Le message « Aucune figurine reconnue » propose
+    « 🔑 C'est un porte-clés : le chercher par nom » puis « 🔎 Google Lens ». Recherche des porte-clés : tous ceux du
+    personnage (40 au plus), plus seulement les 8 premiers objets (17 porte-clés Batman).
   · v203 (13/11) : UNE FIGURINE RECONNUE NE PART PLUS EN BLISTER (Mathias : Doctor Strange photographié dans une
     vitrine, envoyé tout seul dans « Base de blisters JB »). Ressemblance au blister de 0,75 à 0,85 : passage direct au
     blister seulement si Brickognize ne voit aucune figurine à 0,6 ou plus ; sinon résultats de la figurine avec

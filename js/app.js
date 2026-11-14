@@ -98,7 +98,7 @@ window.addEventListener("popstate", () => {
   desarmerRetour();
 });
 
-const VERSION_APPLI = "v203"; // même numéro que le cache de sw.js (« briquotheque-vNN »)
+const VERSION_APPLI = "v204"; // même numéro que le cache de sw.js (« briquotheque-vNN »)
 
 // Erreurs inattendues : montrées à l'écran (message) et gardées dans les Outils, pour les signaler
 const ERREURS = [];
@@ -567,7 +567,11 @@ async function identifier(photo) {
         return;
       }
       if (premiere && etat.autreVu && await proposerAutreChose(etat.autreVu)) return;
-      if (await demander("Aucune figurine reconnue sur cette photo. Essayez avec la figurine seule, bien éclairée, sur un fond uni, en la recadrant au plus près.\n\nOu cherchez-la avec Google Lens, puis tapez le code trouvé.", "🔎 Google Lens", "Fermer")) chercherAvecLens();
+      // Mathias, 14/11/2026 : porte-clés Batman jamais reconnu, et aucun moyen de dire « c'est un porte-clés » ici
+      const i = await choisirAction("Aucune figurine reconnue sur cette photo. Essayez avec la figurine seule, bien éclairée, sur un fond uni, en la recadrant au plus près.",
+        ["🔑 C'est un porte-clés : le chercher par nom", "🔎 Google Lens"]);
+      if (i === 0) EcranObjet.ouvrirPorteCles();
+      else if (i === 1) chercherAvecLens();
       return;
     }
     etat.photos.push({ url, items });
