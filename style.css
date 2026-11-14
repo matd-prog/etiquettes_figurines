@@ -683,3 +683,9 @@ html[lang="fr"] .langue-verif { display: none; }
 .photos-detail figure { margin: 0; flex: 0 0 46%; }
 .photos-detail img { width: 100%; border-radius: 10px; display: block; }
 .photos-detail figcaption { font-size: .85em; text-align: center; color: var(--gris, #666); }
+
+/* Statistiques : décompte total / différents */
+.decompte { width: 100%; border-collapse: collapse; font-size: .95em }
+.decompte th, .decompte td { padding: 6px 4px; text-align: right; border-bottom: 1px solid var(--bord) }
+.decompte th:first-child, .decompte td:first-child { text-align: left }
+.decompte-total td { border-bottom: none; font-weight: 700 }

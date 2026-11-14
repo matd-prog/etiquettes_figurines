@@ -22,7 +22,23 @@ const Statistiques = {
     }
     for (const [o, figs] of parAffiche) parOnglet.push([o, figs.length, new Set(figs.map(c => c.code.toUpperCase())).size]);
     const lire = async f => { try { return await f(etat.classeur); } catch (err) { return []; } };
-    const sets = await lire(lireSets), objets = await lire(lireObjets);
+    const sets = await lire(lireSets), objets = await lire(lireObjets), objetsJB = await lire(lireObjetsJB);
+    // Décompte « total / différents » (Mathias, 14/11/2026 : « 10 exemplaires d'un même blister, je veux savoir combien
+    // j'en ai de différents »). Customs : même code et même nom sans le n° (« 12/50 ») = un seul, comme dans Ma collection.
+    const casesCustoms = ((etat.collection || {})[THEME_CUSTOMS.onglet] || { cases: [] }).cases.filter(c => c.code || c.nom);
+    const custDiff = new Set(casesCustoms.map(c => Collection._cle(c, THEME_CUSTOMS.onglet))).size;
+    const legoCases = Object.entries(etat.collection || {}).filter(([o]) => o !== THEME_CUSTOMS.onglet).flatMap(([, x]) => x.cases.filter(c => c.code));
+    const legoDiff = new Set(legoCases.map(c => c.code.toUpperCase())).size;
+    const somme = l => l.reduce((s, x) => s + (x.quantite || 1), 0);
+    const diff = (l, k) => new Set(l.map(x => normaliser(String(k(x) || "")))).size;
+    const decompte = [
+      ["🧍 Figurines LEGO", legoCases.length, legoDiff],
+      ["🎨 Customs (blisters JB…)", casesCustoms.length, custDiff],
+      ["🧱 Sets", somme(sets), diff(sets, x => x.code)],
+      ["🔑 Objets dérivés", somme(objets), diff(objets, x => x.code)],
+      ["🟪 Objets JB (tiles…)", somme(objetsJB), diff(objetsJB, x => x.nom)],
+    ].filter(l => l[1]);
+    const totalTout = decompte.reduce((s, l) => s + l[1], 0), totalDiff = decompte.reduce((s, l) => s + l[2], 0);
     const nbFigs = parOnglet.reduce((s, o) => s + o[1], 0);
     const customs = parOnglet.find(o => o[0] === THEME_CUSTOMS.onglet);
     const barre = (n, t) => `<div class="barre-avancement"><div style="width:${Math.round(100 * n / Math.max(1, t))}%"></div></div>`;
@@ -45,6 +61,11 @@ const Statistiques = {
     const jbPossedees = customs ? jb.filter(f => CatalogueJB.codes(f).some(k => possedes.has(k.toUpperCase()))).length : 0;
 
     $("st-contenu").innerHTML = `
+      <div class="carte"><p class="sous-titre">🔢 Décompte</p>
+        <table class="decompte"><thead><tr><th></th><th>Total</th><th>Différents</th></tr></thead><tbody>
+          ${decompte.map(([l, n, d]) => `<tr><td>${l}</td><td>${n}</td><td><b>${d}</b></td></tr>`).join("")}
+          <tr class="decompte-total"><td>Tout compris</td><td>${totalTout}</td><td><b>${totalDiff}</b></td></tr></tbody></table>
+        <p class="score">« Différents » : plusieurs exemplaires d'une même figurine, d'un même blister ou d'un même set ne comptent qu'une fois.</p></div>
       <div class="carte"><p class="sous-titre">📦 En résumé</p>
         <div class="ligne-valeur"><span>Figurines (exemplaires)</span><b>${nbFigs}</b></div>
         <div class="ligne-valeur"><span>Figurines différentes</span><b>${possedes.size}</b></div>

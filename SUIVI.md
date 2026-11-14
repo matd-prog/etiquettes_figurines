@@ -125,6 +125,10 @@ Tout le code et les données sont dans ce dépôt ; ce fichier sert à reprendre
     « Figothèque » toujours acceptées. INPI vérifié par Mathias (02/10) : une seule marque
     « BRIQUOTHEQUE » (n° 1695257, Wienerberger, 1991, classe 19 matériaux de construction), EXPIRÉE le 25/09/2021 ->
     nom libre en France. EUIPO « Briquothèque » et « Briquotheque » : 0 marque -> nom libre en France et dans l'UE ; dépôt éventuel classes 9 et 42 avant une diffusion commerciale.
+  · v205 (14/11) : DÉCOMPTE TOTAL / DIFFÉRENTS dans 📊 Statistiques (Mathias : « 10 exemplaires d'un même blister, je
+    veux savoir combien j'en ai de différents »). Tableau en tête : figurines LEGO, customs (blisters JB…), sets, objets
+    dérivés, objets JB, en total et en différents (customs : même code et même nom sans le n° = un seul, comme Ma
+    collection). Sur sa sauvegarde : 891 figurines LEGO (846 différentes), 647 customs (268 différents), 299 sets (288).
   · v204 (14/11) : PORTE-CLÉS QUAND AUCUNE FIGURINE N'EST RECONNUE (Mathias : porte-clés « Kiss Kiss Tuxedo Batman »
     jamais reconnu, seuls « Google Lens » et « Fermer » proposés). Le message « Aucune figurine reconnue » propose
     « 🔑 C'est un porte-clés : le chercher par nom » puis « 🔎 Google Lens ». Recherche des porte-clés : tous ceux du
