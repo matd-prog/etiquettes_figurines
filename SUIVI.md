@@ -125,6 +125,9 @@ Tout le code et les données sont dans ce dépôt ; ce fichier sert à reprendre
     « Figothèque » toujours acceptées. INPI vérifié par Mathias (02/10) : une seule marque
     « BRIQUOTHEQUE » (n° 1695257, Wienerberger, 1991, classe 19 matériaux de construction), EXPIRÉE le 25/09/2021 ->
     nom libre en France. EUIPO « Briquothèque » et « Briquotheque » : 0 marque -> nom libre en France et dans l'UE ; dépôt éventuel classes 9 et 42 avant une diffusion commerciale.
+  · v206 (14/11) : RETOUR DEPUIS LA FICHE D'UN BLISTER (Mathias : depuis « ✏️ Modifier ce blister » d'un de ses deux
+    exemplaires, le bouton retour ramenait à l'accueil). Retour du téléphone ou flèche ← : la fiche se ferme et la liste
+    des exemplaires revient ; le retour suivant ramène à l'écran d'avant.
   · v205 (14/11) : DÉCOMPTE TOTAL / DIFFÉRENTS dans 📊 Statistiques (Mathias : « 10 exemplaires d'un même blister, je
     veux savoir combien j'en ai de différents »). Tableau en tête : figurines LEGO, customs (blisters JB…), sets, objets
     dérivés, objets JB, en total et en différents (customs : même code et même nom sans le n° = un seul, comme Ma

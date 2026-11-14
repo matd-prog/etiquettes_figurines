@@ -73,6 +73,7 @@ function afficher(ecran, retour = false) {
 // Flèche ← du bandeau : même chose que le bouton retour du téléphone, pour les appareils qui n'en ont pas
 function retourEntete() {
   if ($("menu-actions").open) { $("menu-fermer").click(); return; }
+  if (ecranActuel === "base" && $("base-liste") && $("base-liste").querySelector("[data-modif-ok]")) { Base._afficherListe(); return; }
   if (pileEcrans.length) afficher(pileEcrans.pop(), true);
   else afficher(etat.classeur ? "accueil" : "fichier", true);
 }
@@ -92,13 +93,18 @@ window.addEventListener("popstate", () => {
   if ($("menu-actions").open) { $("menu-fermer").click(); armerRetour(); return; } // menu ouvert : retour = fermer
   if (ecranActuel === "chargement") { armerRetour(); toast("Patientez, lecture en cours…"); return; }
   if (ecranActuel === "recadrage") { armerRetour(); Recadrage.annuler(); return; } // l'appelant choisit l'écran suivant
+  // fiche « ✏️ Modifier ce blister » ouverte dans la liste : retour = revenir à la liste des exemplaires, pas à l'écran
+  // d'avant (Mathias, 14/11/2026 : le retour depuis la fiche d'un des deux exemplaires ramenait à l'accueil)
+  if (ecranActuel === "base" && $("base-liste") && $("base-liste").querySelector("[data-modif-ok]")) {
+    armerRetour(); Base._afficherListe(); return;
+  }
   if (pileEcrans.length) { afficher(pileEcrans.pop(), true); return; }
   if (!aLaRacine()) { afficher(etat.classeur ? "accueil" : "fichier", true); return; }
   // accueil avec des étapes restantes (case photo touchée puis appareil annulé) : on les retire, le retour suivant ferme
   desarmerRetour();
 });
 
-const VERSION_APPLI = "v205"; // même numéro que le cache de sw.js (« briquotheque-vNN »)
+const VERSION_APPLI = "v206"; // même numéro que le cache de sw.js (« briquotheque-vNN »)
 
 // Erreurs inattendues : montrées à l'écran (message) et gardées dans les Outils, pour les signaler
 const ERREURS = [];
